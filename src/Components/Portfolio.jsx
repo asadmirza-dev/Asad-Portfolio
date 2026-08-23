@@ -13,15 +13,15 @@ const Portfolio = () => {
 
   return (
     <div>
-      <Navbar/>
-      <Hero/>
-      <About/>
-      <Projects/>
-      <CaseStudy/>
-      <Skills/>
-      <FAQ/>
-      <Contact/>
-      <Footer/>
+      <Navbar />
+      <Hero />
+      <About />
+      <Projects />
+      <CaseStudy />
+      <Skills />
+      <FAQ />
+      <Contact />
+      <Footer />
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Code2, Cpu, GraduationCap, Sparkles, Terminal } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import asad_black_img from '../assets/hero_asad_pic_natural.png';
+import asad_natural from '../assets/hero_asad_pic_natural.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,7 +15,6 @@ const About = () => {
     "Node.js", "Express.js", "MongoDB", "Python", "HTML5 & CSS3", "Git & GitHub"
   ];
 
-  // PERMANENT GSAP FIX IN REACT
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.utils.toArray(".about-animate").forEach((item) => {
@@ -74,7 +73,6 @@ const About = () => {
   return (
     <div className=" bg-neutral-950  text-white overflow-hidden" ref={sectionRef} id="about">
 
-      {/* 1. INFINITE RUNNING TECH TICKER */}
       <div className="w-full bg-neutral-950 border-y border-neutral-800/80 py-4 overflow-hidden relative select-none">
 
         <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
@@ -101,7 +99,6 @@ const About = () => {
 
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-cyan-500/10 rounded-full blur-[130px] pointer-events-none" />
 
-        {/* Section Header */}
         <div className="flex flex-col items-center text-center gap-3 mb-16 about-animate">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-semibold tracking-wider uppercase">
             <Sparkles size={14} />
@@ -115,17 +112,15 @@ const About = () => {
           </h2>
         </div>
 
-        {/* Story & Image Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-10">
 
-          {/* IMAGE CARD (Left 4 Columns) */}
           <div className="lg:col-span-4 bg-neutral-900/40 border border-neutral-800/80 rounded-3xl p-4 flex items-center justify-center relative overflow-hidden about-animate group">
             <div className="relative w-full h-[320px] sm:h-[380px] lg:h-full rounded-2xl overflow-hidden border border-neutral-800">
               <img
-                src={asad_black_img}
+                src={asad_natural}
                 alt="Asad Ullah"
-                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                onLoad={() => ScrollTrigger.refresh()} // Image load hone par recalculate karega
+                className="w-full h-full object-contain object-top group-hover:scale-105 transition-transform duration-500"
+                onLoad={() => ScrollTrigger.refresh()} 
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
               <div className="absolute bottom-4 left-4 right-4">
@@ -135,7 +130,6 @@ const About = () => {
             </div>
           </div>
 
-          {/* MAIN STORY CARD (Right 8 Columns) */}
           <div className="lg:col-span-8 bg-neutral-900/50 border border-neutral-800/80 rounded-3xl p-8 sm:p-10 flex flex-col justify-between backdrop-blur-sm relative overflow-hidden about-animate hover:border-neutral-700 transition-all duration-300">
             <div className="space-y-6">
               <div className="flex items-center gap-3 text-cyan-400">
@@ -159,7 +153,6 @@ const About = () => {
               </p>
             </div>
 
-            {/* Micro Highlights */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 mt-6 border-t border-neutral-800/80">
               <div>
                 <h4 className="text-xs text-neutral-500 uppercase font-mono">Location</h4>
@@ -178,7 +171,6 @@ const About = () => {
 
         </div>
 
-        {/* 3 Quick Cards Row */}
         <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-neutral-900/40 border border-neutral-800/80 rounded-2xl p-6 flex items-start gap-4 hover:border-cyan-500/40 transition-all duration-300">
             <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">

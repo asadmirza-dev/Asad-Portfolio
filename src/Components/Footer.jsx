@@ -10,12 +10,10 @@ const Footer = () => {
     <footer className="bg-black text-neutral-400 py-8 px-4 sm:px-8 lg:px-16 border-t border-neutral-900 relative z-10">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
         
-        {/* Left Side: Copyright */}
         <div>
           © 2026 <span className="text-white font-bold">Asad Ullah</span>. Built with React & Tailwind CSS.
         </div>
 
-        {/* Center: Quick Links */}
         <div className="flex items-center gap-4 text-neutral-500">
           <a href="#projects" className="hover:text-cyan-400 transition-colors">Projects</a>
           <span>•</span>

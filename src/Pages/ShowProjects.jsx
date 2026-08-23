@@ -19,63 +19,63 @@ const ShowProjects = () => {
   const projectsList = [
     {
       id: 1,
-      title: "3D Hero Page",
+      title: "Food Landing Page",
       category: "HTML5, CSS3 & JS",
       tag: "Interactive UI",
-      description: "A visually striking hero section featuring perspective shifts, 3D transform layers, and smooth mouse-move interaction.",
+      description: "A food website landing page with a responsive layout, CSS 3D effects, and mouse-move animations in the hero section.",
       icon: <FaCube className="text-cyan-400" size={22} />,
       accentColor: "border-cyan-500/30 hover:border-cyan-400 group-hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]",
       gradient: "from-cyan-500/10 via-cyan-500/5 to-transparent",
-      githubLink: "#",
-      liveLink: "#"
+      githubLink: "https://github.com/asadmirza-dev/Full-Responsive-food-website",
+      liveLink: "https://full-responsive-food-website.vercel.app/"
     },
     {
       id: 2,
       title: "Weather Forecast App",
       category: "HTML5, CSS3 & Vanilla JS",
-      tag: "API Integration",
-      description: "Clean weather UI displaying dynamic temperature status, humidity indexes, and atmospheric conditions based on location input.",
+      tag: "Weather API",
+      description: "A weather app that fetches live weather data and shows the temperature, humidity, wind speed, and weather condition for a searched city.",
       icon: <FaCloudSun className="text-amber-400" size={22} />,
       accentColor: "border-amber-500/30 hover:border-amber-400 group-hover:shadow-[0_0_30px_rgba(245,158,11,0.15)]",
       gradient: "from-amber-500/10 via-amber-500/5 to-transparent",
-      githubLink: "#",
-      liveLink: "#"
+      githubLink: "https://github.com/asadmirza-dev/Responsive-Weather-app",
+      liveLink: "https://responsive-weather-app-chi.vercel.app/"
     },
     {
       id: 3,
       title: "Interactive Quiz Application",
       category: "HTML5, CSS3 & JavaScript",
-      tag: "Logic & DOM",
-      description: "Dynamic quiz interface handling real-time score tracking, timer bounds, options validation, and instant summary screens.",
+      tag: "JavaScript Logic",
+      description: "A quiz app with multiple-choice questions, a timer, score tracking, and a final result screen.",
       icon: <FaQuestionCircle className="text-emerald-400" size={22} />,
       accentColor: "border-emerald-500/30 hover:border-emerald-400 group-hover:shadow-[0_0_30px_rgba(16,185,129,0.15)]",
       gradient: "from-emerald-500/10 via-emerald-500/5 to-transparent",
-      githubLink: "#",
-      liveLink: "#"
+      githubLink: "https://github.com/asadmirza-dev/Quiz-app-by-js",
+      liveLink: "https://quiz-app-by-js-mauve.vercel.app/"
     },
     {
       id: 4,
       title: "Animated Webpage Showcase",
       category: "HTML, CSS & JS Animations",
-      tag: "CSS Keyframes",
-      description: "Fluid web page layout showcasing custom CSS animations, scroll triggers, layered text masks, and subtle transitions.",
+      tag: "CSS Animations",
+      description: "A landing page built to practice CSS keyframe animations, hover effects, text animations, and smooth section transitions.",
       icon: <FaLaptopCode className="text-purple-400" size={22} />,
       accentColor: "border-purple-500/30 hover:border-purple-400 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]",
       gradient: "from-purple-500/10 via-purple-500/5 to-transparent",
-      githubLink: "#",
-      liveLink: "#"
+      githubLink: "https://github.com/asadmirza-dev/Modern-animated-webpage",
+      liveLink: "https://modern-animated-webpage.vercel.app/"
     },
     {
       id: 5,
       title: "Stone Paper Scissors Game",
       category: "HTML5, CSS3 & Vanilla JS",
       tag: "Game Logic",
-      description: "A fun classic hand game built with state management, automated computer turn generation, and score calculation.",
+      description: "A simple browser game where the user plays against the computer, with random choices and live score updates.",
       icon: <FaGamepad className="text-rose-400" size={22} />,
       accentColor: "border-rose-500/30 hover:border-rose-400 group-hover:shadow-[0_0_30px_rgba(244,63,94,0.15)]",
       gradient: "from-rose-500/10 via-rose-500/5 to-transparent",
-      githubLink: "#",
-      liveLink: "#"
+      githubLink: "https://github.com/asadmirza-dev/stone-paper-secissor-game-",
+      liveLink: "https://stone-paper-secissor-game.vercel.app/"
     }
   ];
 
@@ -85,7 +85,6 @@ const ShowProjects = () => {
     const validCards = cardsRef.current.filter(Boolean);
 
     const ctx = gsap.context(() => {
-      // Header Animation
       if (headerRef.current) {
         gsap.fromTo(
           headerRef.current,
@@ -94,7 +93,6 @@ const ShowProjects = () => {
         );
       }
 
-      // Cards Animation (Explicit From & To state)
       if (validCards.length > 0) {
         gsap.fromTo(
           validCards,
@@ -111,22 +109,20 @@ const ShowProjects = () => {
       }
     }, containerRef);
 
-    return () => ctx.revert(); // Cleanup on unmount
+    return () => ctx.revert();
   }, []);
 
   return (
     <div ref={containerRef} className="bg-black text-white min-h-screen py-16 px-4 sm:px-8 lg:px-16 relative overflow-hidden">
-      
-      {/* Background Glow */}
+
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-cyan-950/20 blur-[150px] pointer-events-none rounded-full"></div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        
-        {/* Header Section */}
+
         <div ref={headerRef}>
           <div className="flex items-center justify-between mb-16">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="inline-flex items-center gap-2.5 text-xs font-mono text-neutral-300 hover:text-cyan-400 bg-neutral-900/90 border border-neutral-800 px-4 py-2.5 rounded-xl transition-all duration-300 hover:border-cyan-500/40 shadow-lg group"
             >
               <FaArrowLeft size={13} className="group-hover:-translate-x-1 transition-transform" />
@@ -143,12 +139,11 @@ const ShowProjects = () => {
               Mini Projects & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-500">Code Labs</span>
             </h1>
             <p className="text-neutral-400 text-sm sm:text-base font-light leading-relaxed">
-              A complete collection of functional web experiments, DOM practice projects, and HTML/CSS/JS interactive tools built during development iterations.
+              Small projects I built while practicing HTML, CSS, JavaScript, animations, APIs, and DOM manipulation.
             </p>
           </div>
         </div>
 
-        {/* 3-COLUMN RESPONSIVE GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projectsList.map((project) => (
             <div

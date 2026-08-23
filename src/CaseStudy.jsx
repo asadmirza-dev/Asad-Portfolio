@@ -1,17 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaTwitter, FaCode, FaExternalLinkAlt, FaTimes, FaLayerGroup, FaCheckCircle, FaLaptopCode, FaBolt } from 'react-icons/fa';
+import { FaCode, FaExternalLinkAlt, FaTimes, FaLayerGroup, FaCheckCircle, FaLaptopCode, FaBolt } from 'react-icons/fa';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const CaseStudy = () => {
   const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
+
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const cardsRef = useRef([]);
   const modalRef = useRef(null);
   const modalContentRef = useRef(null);
+
+
+  gsap.registerPlugin(ScrollTrigger)
 
 
   const caseStudies = [
     {
       id: "twitter-clone",
-      isFeatured: true, // Takes full row / big bento card
+      isFeatured: true,
       title: "Twitter / X Clone",
       subtitle: "A responsive social media interface built with React and Tailwind CSS.",
       myRole: "I built reusable components, dynamic routes, interactive UI states, and a dark-mode interface inspired by Twitter/X.",
@@ -33,7 +41,7 @@ const CaseStudy = () => {
     {
       id: "weather-app",
       isFeatured: false,
-      title: "Dynamic Weather Forecast System",
+      title: "Dynamic Weather Forecast ",
       subtitle: "A weather app that fetches live data from an API and updates the interface based on the selected city.",
       myRole: " API integration, async JavaScript, loading states, and responsive UI..",
       category: "Vanilla JavaScript",
@@ -41,7 +49,7 @@ const CaseStudy = () => {
       description: "Focuses on fetch API error handling, async data parsing, and dynamic UI state updates without external dependencies.",
       problem: "Managing unpredictable weather API response states and dynamic layout color shifts based on live conditions.",
       solution: "Structured native JS promises and async/await handlers with dynamic DOM manipulation for seamless UI state updates.",
-      keyFeatures: ["Async Weather API Integration", "Dynamic UI Theme Shifts", "Error Handling & Fallback UI"],
+      keyFeatures: ["Async Weather API Integration", "Error Handling & Fallback UI"],
       techStack: ["HTML5", "CSS3", "JavaScript (ES6+)", "REST API"],
       liveLink: "https://responsive-weather-app-chi.vercel.app/",
       githubLink: "https://github.com/asadmirza-dev/Responsive-Weather-app"
@@ -51,40 +59,72 @@ const CaseStudy = () => {
       isFeatured: false,
       title: "E-Commerce Cart System",
       subtitle: "A simple shopping cart built with HTML, CSS, and JavaScript.",
-      myRole: "My Role: Product display, cart logic, quantity controls, and localStorage.",
+      myRole: " Product display, cart logic, quantity controls, and localStorage.",
       category: "Vanilla JavaScript",
       badge: "Cart System",
-     description: "I made a basic e-commerce website where users can add products to the cart, change quantities, remove items, and keep their cart data saved in the browser.",
+      description: "I made a basic e-commerce website where users can add products to the cart, change quantities, remove items, and keep their cart data saved in the browser.",
       problem: "I wanted to learn how an online shopping cart works and how product data can be saved even after refreshing the page.",
       solution: "I used JavaScript to add products to the cart, update the total price, change product quantity, remove items, and save cart data in localStorage.",
-     keyFeatures: [
-  "Add products to cart",
-  "Increase or decrease product quantity",
-  "Remove products from cart",
-  "Automatic total price calculation",
-  "Cart data saved with localStorage"
-],
-     techStack: ["HTML5", "CSS3", "JavaScript", "localStorage"],
+      keyFeatures: [
+        "Add products to cart",
+        "Increase or decrease product quantity",
+        "Remove products from cart",
+        "Automatic total price calculation",
+        "Cart data saved with localStorage"
+      ],
+      techStack: ["HTML5", "CSS3", "JavaScript", "localStorage"],
       liveLink: "https://e-commerence-website.vercel.app/",
       githubLink: "https://github.com/asadmirza-dev/e-commerence-website"
     }
   ];
 
-  // GSAP Modal Animation
   useEffect(() => {
-    if (selectedCaseStudy && modalRef.current && modalContentRef.current) {
+    const ctx = gsap.context(() => {
       gsap.fromTo(
-        modalRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.3, ease: 'power2.out' }
+        headerRef.current.children,
+        {
+          opacity: 0,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.15,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
       );
+
       gsap.fromTo(
-        modalContentRef.current,
-        { opacity: 0, y: 30, scale: 0.95 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: 'power3.out', delay: 0.1 }
+        cardsRef.current,
+        {
+          opacity: 0,
+          y: 35,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.15,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: cardsRef.current[0],
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
       );
-    }
-  }, [selectedCaseStudy]);
+
+      ScrollTrigger.refresh();
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const closeModal = () => {
     if (modalRef.current && modalContentRef.current) {
@@ -100,10 +140,10 @@ const CaseStudy = () => {
   };
 
   return (
-    <section className="bg-black text-white py-24 px-4 sm:px-8 lg:px-16 relative" id="casestudies">
+    <section ref={sectionRef} className="bg-black text-white py-24 px-4 sm:px-8 lg:px-16 relative" id="casestudies">
       <div className="max-w-6xl mx-auto space-y-16">
-        
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+
+        <div ref={headerRef} className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-mono font-semibold tracking-widest uppercase">
             <FaLayerGroup size={13} />
             <span>In-Depth Engineering</span>
@@ -112,20 +152,20 @@ const CaseStudy = () => {
             Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-500">Case Studies</span>
           </h2>
           <p className="text-neutral-400 text-sm sm:text-base font-light">
-          A closer look at the problems, decisions, and technologies behind my projects.
+            A closer look at the problems, decisions, and technologies behind my projects.
           </p>
         </div>
 
-        {/* BENTO GRID SYSTEM */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {caseStudies.map((study) => (
+          {caseStudies.map((study, index) => (
             <div
+              ref={(element) => {
+                cardsRef.current[index] = element;
+              }}
               key={study.id}
-              className={`group bg-neutral-900/70 border border-neutral-800 hover:border-cyan-500/40 rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 shadow-xl relative overflow-hidden ${
-                study.isFeatured ? "lg:col-span-12 bg-gradient-to-br from-neutral-900 via-neutral-900/90 to-cyan-950/20" : "lg:col-span-6"
-              }`}
+              className={`group bg-neutral-900/70 border border-neutral-800 hover:border-cyan-500/40 rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 shadow-xl relative overflow-hidden ${study.isFeatured ? "lg:col-span-12 bg-gradient-to-br from-neutral-900 via-neutral-900/90 to-cyan-950/20" : "lg:col-span-6"
+                }`}
             >
-              {/* Card Header */}
               <div className="space-y-6 relative z-10">
                 <div className="flex items-center justify-between flex-wrap gap-3">
                   <span className="text-xs font-mono text-cyan-400 bg-cyan-950/80 border border-cyan-800/60 px-3.5 py-1.5 rounded-lg font-medium">
@@ -148,7 +188,6 @@ const CaseStudy = () => {
                   </p>
                 </div>
 
-                {/* Tech Stack Pills */}
                 <div className="flex flex-wrap gap-2 pt-2">
                   {study.techStack.map((tech, idx) => (
                     <span key={idx} className="text-[11px] font-mono text-neutral-400 bg-neutral-950 border border-neutral-800 px-3 py-1 rounded-md">
@@ -158,7 +197,6 @@ const CaseStudy = () => {
                 </div>
               </div>
 
-              {/* Action Area */}
               <div className="pt-8 mt-8 border-t border-neutral-800/80 flex items-center justify-between relative z-10">
                 <span className="text-xs text-neutral-400 italic">
                   My Role: <span className="text-neutral-300">{study.myRole}</span>
@@ -177,7 +215,6 @@ const CaseStudy = () => {
 
       </div>
 
-      {/* CASE STUDY POPUP MODAL */}
       {selectedCaseStudy && (
         <div ref={modalRef} className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
           <div
@@ -192,7 +229,6 @@ const CaseStudy = () => {
               <FaTimes size={16} />
             </button>
 
-            {/* Modal Header */}
             <div className="space-y-3">
               <span className="text-xs font-mono text-cyan-400 bg-cyan-950/80 border border-cyan-800/60 px-3 py-1 rounded-md">
                 {selectedCaseStudy.category}
@@ -205,7 +241,6 @@ const CaseStudy = () => {
               </p>
             </div>
 
-            {/* Problem Statement */}
             <div className="bg-neutral-950/80 border border-neutral-800 rounded-2xl p-6 space-y-2">
               <h4 className="text-sm font-mono text-cyan-400 font-semibold flex items-center gap-2">
                 <FaLaptopCode size={16} />
@@ -216,7 +251,6 @@ const CaseStudy = () => {
               </p>
             </div>
 
-            {/* Solution & Engineering Strategy */}
             <div className="bg-neutral-950/80 border border-neutral-800 rounded-2xl p-6 space-y-2">
               <h4 className="text-sm font-mono text-emerald-400 font-semibold flex items-center gap-2">
                 <FaCheckCircle size={16} />
@@ -227,7 +261,6 @@ const CaseStudy = () => {
               </p>
             </div>
 
-            {/* Key Features & Architecture Breakdown */}
             <div className="space-y-3">
               <h4 className="text-sm font-mono text-neutral-300 font-semibold">
                 Architectural Highlights & Key Features:
@@ -242,7 +275,6 @@ const CaseStudy = () => {
               </div>
             </div>
 
-            {/* Action Links */}
             <div className="pt-6 border-t border-neutral-800 flex items-center gap-4">
               <a
                 href={selectedCaseStudy.liveLink}

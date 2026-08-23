@@ -1,7 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState,useRef,useEffect } from 'react';
 import { FaQuestionCircle, FaChevronDown } from 'react-icons/fa';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 const FAQ = () => {
+   const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const cardsRef = useRef(null);
+
+ useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        headerRef.current.children,
+        {
+          opacity: 0,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.15,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      gsap.fromTo(
+        cardsRef.current.children,
+        {
+          opacity: 0,
+          y: 35,
+          scale: 0.97,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      ScrollTrigger.refresh();
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const [openIndex, setOpenIndex] = useState(null);
 
   const faqs = [
@@ -28,11 +87,10 @@ const FAQ = () => {
   };
 
   return (
-    <section className="bg-gradient-to-b from-black via-[#080d1a] to-[#050811] text-white py-24 px-4 sm:px-8 lg:px-16 relative" id="faqs">
+    <section ref={sectionRef} className="bg-gradient-to-b from-black via-[#080d1a] to-[#050811] text-white py-24 px-4 sm:px-8 lg:px-16 relative" id="faqs">
       <div className="max-w-4xl mx-auto space-y-12">
-        
-        {/* Header */}
-        <div className="text-center space-y-3">
+
+        <div ref={headerRef} className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-semibold uppercase tracking-wider">
             <FaQuestionCircle size={14} />
             <span>Got Questions?</span>
@@ -45,12 +103,11 @@ const FAQ = () => {
           </p>
         </div>
 
-        {/* FAQ Accordion List */}
-        <div className="space-y-4">
+        <div ref={cardsRef} className="space-y-4">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div 
+              <div
                 key={index}
                 className="bg-neutral-900/80 border border-neutral-800 rounded-2xl overflow-hidden transition-all duration-300"
               >
@@ -59,9 +116,9 @@ const FAQ = () => {
                   className="w-full flex items-center justify-between p-5 sm:p-6 text-left font-semibold text-base sm:text-lg text-white hover:text-cyan-400 transition-colors focus:outline-none"
                 >
                   <span>{faq.question}</span>
-                  <FaChevronDown 
-                    size={16} 
-                    className={`text-neutral-400 transition-transform duration-300 ${isOpen ? 'rotate-180 text-cyan-400' : ''}`} 
+                  <FaChevronDown
+                    size={16}
+                    className={`text-neutral-400 transition-transform duration-300 ${isOpen ? 'rotate-180 text-cyan-400' : ''}`}
                   />
                 </button>
 
