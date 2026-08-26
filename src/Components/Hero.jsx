@@ -49,7 +49,7 @@ const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen pt-28 pb-16 px-6 md:px-16 flex items-center justify-center overflow-hidden bg-black text-white"
+      className="relative w-full min-h-screen pt-28 pb-16 px-6 md:px-16 flex items-center justify-center overflow-hidden bg-black text-white"
     >
 
       <video autoPlay loop muted playsInline className='absolute top-0 left-0 w-full h-full object-cover z-4 opacity-20' >
