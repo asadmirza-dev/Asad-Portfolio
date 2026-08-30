@@ -42,7 +42,7 @@ const Projects = () => {
   return (
     <section
       ref={sectionRef}
-      className="bg-gradient-to-b from-black via-[#080d1a] to-[#050811] text-white py-24 px-4 sm:px-8 lg:px-16"
+      className="bg-gradient-to-b from-black via-[#080d1a] to-[#050811] text-white py-24 px-4 sm:px-8 lg:px-16 overflow-visible"
       id="projects"
     >
       <div
@@ -67,15 +67,15 @@ const Projects = () => {
         </p>
       </div>
 
-      <div className="max-w-6xl mx-auto space-y-24 sm:space-y-32 relative pb-40">
+      <div className="max-w-6xl mx-auto relative pb-40 flex flex-col items-center gap-12">
         {Projectsdetails.map((project, index) => (
           <div
             key={project.id || index}
             style={{
-              top: `${96 + index * 65}px`,
+              top: `${96 + index * 68}px`,
               zIndex: index + 1
             }}
-            className={`relative sticky group bg-neutral-950/95 border border-neutral-800/80 rounded-3xl overflow-hidden p-6 sm:p-10 shadow-lg shadow-black/40 hover:border-neutral-700 transition-colors duration-300 ${project.borderColor}`}
+            className={`sticky w-full group bg-neutral-950/95 border border-neutral-800/80 rounded-3xl overflow-hidden p-6 sm:p-10 shadow-2xl shadow-black/80 hover:border-neutral-700 transition-colors duration-300 ${project.borderColor}`}
           >
             <div
               className={`absolute inset-0 bg-gradient-to-br ${project.accentColor} opacity-20 pointer-events-none`}

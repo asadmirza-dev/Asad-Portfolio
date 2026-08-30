@@ -51,7 +51,7 @@ const Navbar = () => {
 
           <div className="flex flex-col items-center my-6 text-center">
             <div className="w-16 h-16 rounded-full border-2 border-cyan-400 overflow-hidden mb-2">
-              <img src={asad_img} alt="Asad Ulah" className="w-full h-full object-cover" />
+              <img src={asad_img} alt="Asad Ulah" className="w-full h-full object-cover object-top" />
             </div>
             <h3 className="font-semibold text-white">Asad Ulah</h3>
             <p className="text-xs text-neutral-400">Frontend & Web Developer</p>
